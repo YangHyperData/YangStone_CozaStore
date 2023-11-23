@@ -1,0 +1,47 @@
+﻿@model CozaStore.Models.Banner
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Dashboard/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div class="container card">
+    <hr />
+    <h4>Banner</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Name Product
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.Name)
+        </dd>
+        <dt>
+            Image Product
+        </dt>
+        <dd>
+            <img src="~/Asset/images/@Model.Product.Illsutration" width="250" alt="Alternate Text" />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContentHigh)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContentHigh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contentlow)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contentlow)
+        </dd>
+
+
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Bannerid }, new { @class = "btn btn-warning" })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-danger" })
+    </dl>
+</div>

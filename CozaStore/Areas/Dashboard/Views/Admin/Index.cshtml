@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Dashboard/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using CozaStore.Models
+<div class="container-fluid">
+
+        <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                <h4 class="text-themecolor">Dashboard</h4>
+            </div>
+            <div class="col-md-7 align-self-center text-right">
+                <div class="d-flex justify-content-end align-items-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card oh">
+                    
+                    <div class="card-body">
+                        <div class="d-flex m-b-30 align-items-center no-block">
+                            <h5 class="card-title ">Yearly Sales</h5>
+                            <div class="ml-auto">
+                                <ul class="list-inline font-12">
+                                    <li><i class="fa fa-circle text-info"></i> Shoe</li>
+                                    <li><i class="fa fa-circle text-primary"></i> Total</li>
+                                </ul>
+                            </div>
+                        </div>
+                       @Html.Action("chart", "Admin");
+
+
+                    </div>
+
+                    <div class="card-body bg-light">
+                        <div class="row text-center m-b-20">
+                            <div class="col-lg-4 col-md-4 m-t-20">
+                                <h2 class="m-b-0 font-light">$@Html.FormatValue(@ViewBag.sum,"{0:#,#0}")</h2><span class="text-muted">Total sale</span>
+                            </div>
+                            <div class="col-lg-4 col-md-4 m-t-20">
+                                <h2 class="m-b-0 font-light">@ViewBag.cntorder</h2><span class="text-muted">Order</span>
+                            </div>
+                            <div class="col-lg-4 col-md-4 m-t-20">
+                                <h2 class="m-b-0 font-light">@ViewBag.cntuser</h2><span class="text-muted">Users</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Today's Schedule</h5>
+                        <h6 class="card-subtitle">check out your daily schedule</h6>
+                        <div class="steamline m-t-40">
+                           @Html.Action("ViewTopProduct","Admin")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- News -->
+        <!-- ============================================================== -->
+        @Html.Action("ViewRankUser", "Admin")
+        @Html.Action("Order","Admin")
+    </div>

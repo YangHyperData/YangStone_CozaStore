@@ -1,0 +1,66 @@
+﻿@using CozaStore.Areas.Dashboard.Models
+@model List<RankUser>
+<div class="row">
+    <!-- column -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div>
+                        <h5 class="card-title">Sales Overview</h5>
+                        <h6 class="card-subtitle">Check the monthly sales </h6>
+                    </div>
+                    <div class="ml-auto">
+                        <select class="custom-select b-0">
+                            <option>January</option>
+                            <option value="1">February</option>
+                            <option value="2" selected="">March</option>
+                            <option value="3">April</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th>NAME</th>
+                            <th>DATE</th>
+                            <th>TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ 
+                            int k = 1;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-center">@k
+                                @{ 
+                                    k++;
+                                }
+                                </td>
+                                <td class="txt-oflo">@item.user.FullName</td>
+                                <td class="txt-oflo">@DateTime.Now</td>
+                                <td><span class="text-success">
+                                    @if(item.total == null)
+                                    {
+                                        <text>$0</text>
+                                    }
+                                    else
+                                    {
+                                        <text>$@Html.FormatValue(item.total,"{0:#,#0}")</text>
+                                    }
+                                    </span></td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

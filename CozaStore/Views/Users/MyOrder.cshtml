@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "MyOrder";
+    Layout = "~/Views/Shared/_LayoutCozaStore.cshtml";
+}
+@using  CozaStore.Models
+@model List<Order>
+<div class="container">
+    <div class=" m-lr-auto m-b-50">
+        <div class="m-l-25 m-r--38 m-lr-0-xl">
+            <div class="wrap-table-shopping-cart">
+                <table class="table-shopping-cart">
+                    <tr class="table_head">
+                        <th class="text-center">#</th>
+                        <th style="text-align: center">OrderCode</th>
+                        <th style="text-align: center">Status</th>
+                        <th style="text-align: center">StatusPay</th>
+                        <th class="text-center">DayOrder</th>
+                        <th style="text-align: center">Total</th>
+
+                    </tr>
+                    @{ 
+                        int k = 1;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        
+                        <tr class="table_row" style="height:100px">
+                           <td class="text-center">
+                               @k
+                               @{ 
+                                   k++;
+                               }
+                           </td>
+                            <td style="text-align: center">
+                                <a href="#" class="stext-110 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                    @item.Ordercode
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                @if (item.Status == 1)
+                                {
+                                    <label style="height:24px;background-color:aquamarine;border-radius:10px;color:white">
+                                        Accept
+                                    </label>
+                                }
+                                else
+                                {
+                                    <label style="height:24px;background-color:brown;border-radius:10px;color:white">
+                                        Cancel
+                                    </label>
+                                }
+                            </td>
+                            <td class="text-center" style="padding-left:20px;padding-right:20px">
+                                @if (item.Statuspay == 1)
+                                {
+                                    <label style="height:24px;background-color:aquamarine;border-radius:10px;color:white">Pay</label>
+                                }
+                                else
+                                {
+                                    <label style="height:24px; background-color:brown;border-radius:10px;color:white">NoPay</label>
+                                }
+                            </td>
+                            <td class="text-center">
+                                @Html.FormatValue(item.OrderDay, "{0:dd-MM-yyyy}")
+                            </td>
+                            <td class="text-center">
+                                $@Html.FormatValue(item.TotalPrice, "{0:#,#0}")
+                            </td>
+                        </tr>
+                    }
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

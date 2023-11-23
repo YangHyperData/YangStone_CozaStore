@@ -1,0 +1,77 @@
+﻿@model IEnumerable<CozaStore.Models.Banner>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Dashboard/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                @if (TempData["MessageAlert"] != null)
+                {
+                    <div class="alert alert-success">
+                        <strong>Success!!!</strong> @TempData["MessageAlert"]
+                    </div>
+                }
+                <div class="card-body">
+                    <h4 class="card-title">Banner</h4>
+                    <a class="btn btn-primary" href="@Url.Action("Create")">New Banner</a>
+                    <div class="table-responsive mt-3">
+
+                        <table class="table">
+                            <tr>
+                                <th>#</th>
+                                <th></th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Product.Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ContentHigh)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Contentlow)
+                                </th>
+
+                                <th></th>
+                            </tr>
+                            @{ 
+                                int k = 1;
+                            }
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>
+                                    @k
+                                    @{
+                                        k++;
+                                    }
+                                </td>
+                                <td>
+                                    <img src="~/Asset/images/@item.Product.Illsutration" width="100" alt="Alternate Text" />
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Product.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ContentHigh)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Contentlow)
+                                </td>
+
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Bannerid },new {@class = "btn btn-warning" }) 
+                                    @Html.ActionLink("Details", "Details", new { id = item.Bannerid }, new { @class = "btn btn-primary" }) 
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Bannerid }, new { @class = "btn btn-danger" , onclick = "return confirm('Are sure wants to delete?');" })
+                                </td>
+                            </tr>
+                            }
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

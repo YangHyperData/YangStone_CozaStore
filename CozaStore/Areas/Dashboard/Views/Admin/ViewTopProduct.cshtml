@@ -1,0 +1,16 @@
+﻿@model List<CozaStore.Areas.Dashboard.Models.Rankproduct>
+@foreach (var item in Model)
+{
+    <div class="sl-item">
+        <div class="sl-left bg-info">
+            <img src="~/Asset/images/@item.product.Illsutration" style="border-radius:50%" alt="Alternate Text" />
+        
+        </div>
+        <div class="sl-right">
+            <div class="font-medium">
+                @item.product.Name
+            </div>
+            <div class="desc">@item.numproduct</div>
+        </div>
+    </div>
+}

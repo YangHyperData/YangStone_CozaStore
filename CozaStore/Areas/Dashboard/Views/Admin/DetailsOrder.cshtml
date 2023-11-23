@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "DetailsOrder";
+    Layout = "~/Areas/Dashboard/Views/Shared/_LayoutAdmin.cshtml";
+
+    Order order = ViewBag.oder as Order;
+    User user = ViewBag.user as User;
+}
+
+@using CozaStore.Models
+@model List<getproduct>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Customer</h5>
+                    <div class="message-box">
+                        <div class="message-widget message-scroll">
+                            <!-- Message -->
+                            <a href="javascript:void(0)">
+
+                                <div class="mail-contnet">
+                                    <h5>OrderCode: @order.Ordercode</h5>
+                                    <span class="mail-desc" style="color:black">
+                                        Name: @user.FullName
+                                    </span>
+                                    <span class="mail-desc" style="color:black">
+                                        Gender:
+                                        @{
+                                            string t;
+                                        }
+                                        @if (user.Gender == true)
+                                        {
+                                            t = "Male";
+                                        }
+                                        else
+                                        {
+                                            t = "female";
+                                        }
+                                        @t
+                                    </span>
+                                    <span class="mail-desc" style="color:black">
+                                        Address: @user.Address
+                                    </span>
+                                    <span class="mail-desc" style="color:black">
+                                        Phone: @user.Phone
+                                    </span>
+                                    <span class="mail-desc" style="color:black">
+                                        Total: $@Html.FormatValue(order.TotalPrice,"{0:#,#0}")
+                                    </span>
+                                    <span class="time">TimeOder:  @order.OrderDay</span>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="message-box">
+                        <a href="@Url.Action("PrinfOrder","Admin", new {id = order.Orderid })" class="btn btn-primary">Prinf</a>
+                        <a href="@Url.Action("Accept","Admin", new {id = order.Orderid })" class="btn btn-success">Accept</a>
+                        <a href="@Url.Action("Cancel","Admin", new {id = order.Orderid })" class="btn btn-danger">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Product</h4>
+                </div>
+                <div class="message-box">
+                    <div class="message-widget message-scroll">
+                        @foreach (var item in Model)
+                        {
+                            <a href="javascript:void(0)">
+                                <div class="user-img">
+                                    <img src="~/Asset/images/@item.product.Illsutration" width="50" alt="product"
+                                         class="img-circle"> <span class="profile-status online pull-right"></span>
+                                </div>
+                                <div class="mail-contnet">
+                                    <h5>@item.product.Name</h5> <span class="mail-desc " style="color:black">
+                                        Amount: @item.detailsOrder.Amount
+                                    </span>
+                                                                <span class="time" style="font-size:14px">Price:$@Html.FormatValue(item.product.Price, "{0:#,#0}") </span>
+                                                                <span class="time" style="font-size:14px">Total:$@Html.FormatValue(item.detailsOrder.TotalPrice, "{0:#,#0}") </span>
+
+
+                                </div>
+                            </a>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

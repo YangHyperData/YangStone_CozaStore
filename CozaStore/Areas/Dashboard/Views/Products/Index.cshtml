@@ -1,0 +1,132 @@
+﻿@model IEnumerable<CozaStore.Models.Product>
+
+@{
+                /**/
+
+                ViewBag.Title = "Index";
+                Layout = "~/Areas/Dashboard/Views/Shared/_LayoutAdmin.cshtml";
+}
+@helper Truncate(string s, int length)
+{
+/**/
+                    if(s == null)
+                    {
+                       
+                    }
+                    else if (s.Length < length)
+                    {
+                        @s
+                    }
+                    else
+                    {
+                        @s.Substring(0, length)<text>...</text>
+                    }
+}
+
+<div class="container-fluid mt-3">
+    <div class="row">
+        <!-- column -->
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    @if (@TempData["MessageAlert"] != null)
+                    {
+                        <div class="alert alert-success">
+                            <strong>Success</strong> @TempData["MessageAlert"]
+                        </div>
+                    }
+                    <h4 class="card-title">Products</h4>
+
+                    <a class="btn btn-primary m-b-20" href="@Url.Action("Create","Products")">
+                        Create Product
+                    </a>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        #
+                                    </th>
+                                    <th style="width: 180px">
+                                        @Html.DisplayNameFor(model => model.Name)
+
+                                    </th>
+                                    <th style="width: 240px">
+                                        @Html.DisplayNameFor(model => model.Describe)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Illsutration)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Price)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Amount)
+                                    </th>
+                                    <th>
+                                        Category
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int k = 1;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @k
+                                            @{
+                                                k++;
+                                            }
+                                        </td>
+                                        <td>
+
+                                            @Truncate(item.Name, 50)
+                                        </td>
+                                        <td>
+                                            @Truncate(item.Describe, 80)
+                                        </td>
+                                        <td>
+
+                                            <img src="~/Asset/images/@item.Illsutration" height="100" />
+                                        </td>
+                                        <td>
+                                            $@Html.FormatValue(item.Price, "{0:#,#0}")
+                                        </td>
+                                        <td class="text-center">
+                                            @Html.DisplayFor(modelItem => item.Amount)
+                                        </td>
+                                        <td>
+                                            <span class="label @item.Category.Style">
+                                                @Html.DisplayFor(modelItem => item.Category.Name)
+
+                                            </span>
+
+                                        </td>
+                                        <td>
+                                            @*@Html.ActionLink("Edit", "Edit", new { id = item.Productid }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Productid }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Productid })*@
+                                            <a href="@Url.Action("Edit", new { id = item.Productid })" class="btn btn-warning">
+                                                Edit
+                                            </a>
+                                            <a href="@Url.Action("Details", new { id = item.Productid })" class="btn btn-primary">
+                                                Details
+                                            </a>
+
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.Productid }, new { onclick = "return confirm('Are sure wants to delete?');", @class = "btn btn-danger" })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

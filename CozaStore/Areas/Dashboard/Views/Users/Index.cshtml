@@ -1,0 +1,108 @@
+﻿@model IEnumerable<CozaStore.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Dashboard/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+            @if (TempData["AlertMessage"] != null)
+            {
+                <div class="alert alert-success">
+                    <strong>Success!!!</strong> @TempData["AlertMessage"]
+                </div>
+            }
+                <div class="card-body">
+                    <h4 class="card-title">Users</h4>
+                    <a class="btn btn-primary" href="@Url.Action("Create")">New Users</a>
+                    <div class="table-responsive mt-3">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    #
+                                </th>
+                                <th>
+                                    Image
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FullName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Gender)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.BirthDay)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Gmail)
+                                </th>
+                                
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Phone)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Address)
+                                </th>
+                                <th></th>
+                            </tr>
+                            @{ 
+                                int k = 1;
+                            }
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @k
+                                        @{ 
+                                            k++;
+                                        }
+                                    </td>
+                                    <td>
+                                        <img src="~/Asset/images/@item.image" width="50" alt="Alternate Text" />
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FullName)
+                                    </td>
+                                    <td>
+                                  
+                                        @if(item.Gender == true)
+                                        {
+                                            <span class="label label-danger" >Male</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="label label-warning">Female</span>
+                                        }
+
+                                    </td>
+                                    <td>
+                                   
+                                        @Html.FormatValue(item.BirthDay,"{0:dd/MM/yyyy}")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Gmail)
+                                    </td>
+                                    
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Phone)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Address)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.Userid }, new {@class = "btn btn-warning" }) 
+                                        @Html.ActionLink("Details", "Details", new { id = item.Userid }, new {@class = "btn btn-primary" }) 
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Userid }, new {@class= "btn btn-danger" , onclick = "return confirm('Are sure wants to delete?');" })
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

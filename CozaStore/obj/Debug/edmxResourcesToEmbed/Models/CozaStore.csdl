@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CozaStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Adminid" />
+    </Key>
+    <Property Name="Adminid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="Boolean" />
+    <Property Name="BirthDay" Type="DateTime" Precision="3" />
+    <Property Name="Gmail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Banner">
+    <Key>
+      <PropertyRef Name="Bannerid" />
+    </Key>
+    <Property Name="Bannerid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Productid" Type="Int32" />
+    <Property Name="ContentHigh" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Contentlow" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Banner_Product" FromRole="Banner" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Categoryid" />
+    </Key>
+    <Property Name="Categoryid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Style" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Product_Category" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Color">
+    <Key>
+      <PropertyRef Name="Colorid" />
+    </Key>
+    <Property Name="Colorid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ColorName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DetailsOrders" Relationship="Self.FK_DetailsOrder_Color" FromRole="Color" ToRole="DetailsOrder" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="Commentid" />
+    </Key>
+    <Property Name="Commentid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Userid" Type="Int32" />
+    <Property Name="Productid" Type="Int32" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Time" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Comment_Product" FromRole="Comment" ToRole="Product" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Comment_User" FromRole="Comment" ToRole="User" />
+  </EntityType>
+  <EntityType Name="DetailsOrder">
+    <Key>
+      <PropertyRef Name="Productid" />
+      <PropertyRef Name="Orderid" />
+    </Key>
+    <Property Name="Productid" Type="Int32" Nullable="false" />
+    <Property Name="Orderid" Type="Int32" Nullable="false" />
+    <Property Name="Sizeid" Type="Int32" />
+    <Property Name="Colorid" Type="Int32" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Color" Relationship="Self.FK_DetailsOrder_Color" FromRole="DetailsOrder" ToRole="Color" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_DetailsOrder_Order" FromRole="DetailsOrder" ToRole="Order" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_DetailsOrder_Product" FromRole="DetailsOrder" ToRole="Product" />
+    <NavigationProperty Name="Size" Relationship="Self.FK_DetailsOrder_Size" FromRole="DetailsOrder" ToRole="Size" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Orderid" />
+    </Key>
+    <Property Name="Orderid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ordercode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Userid" Type="Int32" />
+    <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Statuspay" Type="Int32" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="OrderDay" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="DetailsOrders" Relationship="Self.FK_DetailsOrder_Order" FromRole="Order" ToRole="DetailsOrder" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Order_User" FromRole="Order" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Productid" />
+    </Key>
+    <Property Name="Productid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Illsutration" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="Categoryid" Type="Int32" />
+    <NavigationProperty Name="Banners" Relationship="Self.FK_Banner_Product" FromRole="Product" ToRole="Banner" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Product" FromRole="Product" ToRole="Comment" />
+    <NavigationProperty Name="DetailsOrders" Relationship="Self.FK_DetailsOrder_Product" FromRole="Product" ToRole="DetailsOrder" />
+  </EntityType>
+  <EntityType Name="Size">
+    <Key>
+      <PropertyRef Name="Sizeid" />
+    </Key>
+    <Property Name="Sizeid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameSize" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DetailsOrders" Relationship="Self.FK_DetailsOrder_Size" FromRole="Size" ToRole="DetailsOrder" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Userid" />
+    </Key>
+    <Property Name="Userid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="Boolean" />
+    <Property Name="BirthDay" Type="DateTime" Precision="3" />
+    <Property Name="Gmail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="image" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_User" FromRole="User" ToRole="Comment" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Order_User" FromRole="User" ToRole="Order" />
+  </EntityType>
+  <Association Name="FK_Banner_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Banner" Type="Self.Banner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Productid" />
+      </Principal>
+      <Dependent Role="Banner">
+        <PropertyRef Name="Productid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Categoryid" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="Categoryid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetailsOrder_Color">
+    <End Role="Color" Type="Self.Color" Multiplicity="0..1" />
+    <End Role="DetailsOrder" Type="Self.DetailsOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Color">
+        <PropertyRef Name="Colorid" />
+      </Principal>
+      <Dependent Role="DetailsOrder">
+        <PropertyRef Name="Colorid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Productid" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="Productid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Userid" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="Userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetailsOrder_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="DetailsOrder" Type="Self.DetailsOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Orderid" />
+      </Principal>
+      <Dependent Role="DetailsOrder">
+        <PropertyRef Name="Orderid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetailsOrder_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="DetailsOrder" Type="Self.DetailsOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Productid" />
+      </Principal>
+      <Dependent Role="DetailsOrder">
+        <PropertyRef Name="Productid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetailsOrder_Size">
+    <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+    <End Role="DetailsOrder" Type="Self.DetailsOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Size">
+        <PropertyRef Name="Sizeid" />
+      </Principal>
+      <Dependent Role="DetailsOrder">
+        <PropertyRef Name="Sizeid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Userid" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="Userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CozaStoreEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <EntitySet Name="Banners" EntityType="Self.Banner" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Colors" EntityType="Self.Color" />
+    <EntitySet Name="Comments" EntityType="Self.Comment" />
+    <EntitySet Name="DetailsOrders" EntityType="Self.DetailsOrder" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Sizes" EntityType="Self.Size" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Banner_Product" Association="Self.FK_Banner_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Banner" EntitySet="Banners" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetailsOrder_Color" Association="Self.FK_DetailsOrder_Color">
+      <End Role="Color" EntitySet="Colors" />
+      <End Role="DetailsOrder" EntitySet="DetailsOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_Product" Association="Self.FK_Comment_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_User" Association="Self.FK_Comment_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetailsOrder_Order" Association="Self.FK_DetailsOrder_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="DetailsOrder" EntitySet="DetailsOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetailsOrder_Product" Association="Self.FK_DetailsOrder_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="DetailsOrder" EntitySet="DetailsOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetailsOrder_Size" Association="Self.FK_DetailsOrder_Size">
+      <End Role="Size" EntitySet="Sizes" />
+      <End Role="DetailsOrder" EntitySet="DetailsOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

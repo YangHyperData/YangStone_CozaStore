@@ -1,0 +1,88 @@
+﻿@model CozaStore.Models.User
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Dashboard/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card container">
+    <hr />
+    <h4>User Details</h4>
+    <hr />
+    <dl class="form-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        <dt>
+            image
+        </dt>
+        <dd>
+            <img src="~/Asset/images/@Model.image" width="100" alt="Alternate Text" />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @if(Model.Gender == true)
+            {
+                <text>Male</text>
+            }
+            else
+            {
+                <text>Famale</text>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthDay)
+            
+        </dt>
+
+        <dd>
+            @Html.FormatValue(Model.BirthDay, "{0:dd/MM/yyyy}")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+    </dl>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Userid }, new {@class = "btn btn-warning" }) |
+        @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-danger" })
+    </p>
+</div>
+

@@ -1,0 +1,210 @@
+﻿@using CozaStore.Models
+@{ 
+    Admin admin = Session["Admin"] as Admin;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Asset/images/icons/favicon.png">
+    <!-- This page CSS -->
+    <!-- chartist CSS -->
+    <link href="~/AssetAdmin/node_modules/morrisjs/morris.css" rel="stylesheet">
+    <!--c3 plugins CSS -->
+    <link href="~/AssetAdmin/node_modules/c3-master/c3.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/AssetAdmin/dist/css/style.css" rel="stylesheet">
+    <!-- Dashboard 1 Page CSS -->
+    <link href="~/AssetAdmin/dist/css/pages/dashboard1.css" rel="stylesheet">
+    <link href="~/AssetAdmin/icons/font-awesome/css/font-awesome.css" rel="stylesheet">
+ 
+</head>
+@if(Session["Admin"] == null)
+{
+    Response.Redirect("/Dashboard/Login/Login");
+}
+<body class="skin-default-dark fixed-layout">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    @*<div class="preloader">
+        <div class="loader">
+            <div class="loader__figure"></div>
+            <p class="loader__label">CozaShop Admin</p>
+        </div>
+    </div>*@
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <div class="navbar-brand">
+                        <b>
+                            <img src="~/Asset/images/icons/logo-01.png" alt="homepage" class="dark-logo" />
+                        </b>
+                        <span>
+                            <img src="~/AssetAdmin/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                        </span>
+                    </div>
+                </div>
+                <div class="navbar-collapse">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav mr-auto">
+                        <!-- This is  -->
+                        <li class="nav-item hidden-sm-up">
+                            <a class="nav-link nav-toggler waves-effect waves-light"
+                               href="javascript:void(0)"><i class="ti-menu"></i></a>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+                        
+                    </ul>
+                    <ul class="navbar-nav my-lg-0">
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                        @*<li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="~/AssetAdmin/images/users/1.jpg" alt="user" class="img-circle" width="30">
+                            </a>
+                            @if (admin != null)
+                            {
+                                @admin.FullName
+                            }
+                        </li>*@
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <aside class="left-sidebar">
+            <div class="d-flex no-block nav-text-box align-items-center">
+                <span><img src="~/Asset/images/icons/logo-02.png" alt="elegant admin template"></span>
+                <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)">
+                    <i class="ti-menu"></i>
+                </a>
+                <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)">
+                    <i class="ti-menu ti-close"></i>
+                </a>
+            </div>
+
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li>
+                            <a class="waves-effect waves-dark" href="@Url.Action("Index","Admin")" aria-expanded="false">
+                                <i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark"
+                               href="@Url.Action("Index","Products")" aria-expanded="false">
+                                <i class="fa fa-shopping-cart"></i><span class="hide-menu">Products</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark"
+                               href="@Url.Action("Index","Users")" aria-expanded="false">
+                                <i class="fa fa-user"></i><span class="hide-menu">Users</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" href="@Url.Action("Index","Categories")" aria-expanded="false">
+                                <i class="fa fa-table"></i><span class="hide-menu"></span>Category
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" href="@Url.Action("Index","Banners")" aria-expanded="false">
+                                <i class="fa fa-image"></i><span class="hide-menu"></span>Banner
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" href="@Url.Action("Index","Sizes")" aria-expanded="false">
+                                <i class="fa fa-scribd"></i><span class="hide-menu"></span>Sizes
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" href="@Url.Action("Index","Colors")" aria-expanded="false">
+                                <i class="fa fa-pencil-square"></i><span class="hide-menu"></span>Colors
+                            </a>
+                        </li>
+                        
+
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+
+        <div class="page-wrapper">
+            @RenderBody()
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <footer class="footer">
+            © 2023 CozaShop From YangStone
+        </footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="~/AssetAdmin/node_modules/jquery/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap popper Core JavaScript -->
+    <script src="~/AssetAdmin/node_modules/popper/popper.min.js"></script>
+    <script src="~/AssetAdmin/dist/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="~/AssetAdmin/dist/js/perfect-scrollbar.jquery.min.js"></script>
+    <!--Wave Effects -->
+    <script src="~/AssetAdmin/dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="~/AssetAdmin/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/AssetAdmin/dist/js/custom.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <!--morris JavaScript -->
+    <script src="~/AssetAdmin/node_modules/raphael/raphael-min.js"></script>
+    <script src="~/AssetAdmin/node_modules/morrisjs/morris.min.js"></script>
+    <script src="~/AssetAdmin/node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <!--c3 JavaScript -->
+    <script src="~/AssetAdmin/node_modules/d3/d3.min.js"></script>
+    <script src="~/AssetAdmin/node_modules/c3-master/c3.min.js"></script>
+    <!-- Chart JS -->
+    <script src="~/AssetAdmin/dist/js/dashboard1.js"></script>
+</body>
+
+</html>

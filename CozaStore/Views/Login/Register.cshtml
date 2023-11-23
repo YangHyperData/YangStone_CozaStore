@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutCozaStore.cshtml";
+}
+
+<section class="bg0 p-t-104 p-b-116">
+    <div class="container">
+        <div class="flex-c flex-tr">
+            <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+                @using (Html.BeginForm("Register", "Login", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+
+                    <h4 class="mtext-105 cl2 txt-center p-b-30">
+                        Register In Coza
+                    </h4>
+                    <h6>
+                        @TempData["err1"]
+                    </h6>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="FullName" placeholder="Your Full Name" required>
+
+                        <i class="zmdi zmdi-card how-pos4 pointer-none"></i>
+                    </div>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <div class="stext-111 cl2 plh3 size-116  p-l-62 p-r-30" style="padding-top: 10px;">
+                            <input type="file" name="fFileUpload" placeholder="Your Image">
+                        </div>
+                        
+
+                        <i class="zmdi zmdi-image how-pos4 pointer-none"></i>
+                    </div>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="Email" placeholder="Your Email" required>
+                        <i class="how-pos4 pointer-none zmdi zmdi-email"></i>
+
+                    </div>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="Password" placeholder="Your Password" required>
+                        <i class="how-pos4 pointer-none zmdi zmdi-lock"></i>
+                    </div>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="RePassword" placeholder="Retype Your Password" required>
+                        <i class="how-pos4 pointer-none zmdi zmdi-lock"></i>
+                    </div>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="date" name="BirthDay" placeholder="Your Birth Day" required>
+                        <i class="how-pos4 pointer-none zmdi zmdi-calendar"></i>
+                    </div>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <i class="how-pos4 pointer-none zmdi zmdi-male-female"></i>
+                        <div class="p-l-50 p-t-10 d-flex justify-content-center ">
+                            <div class="form-check ">
+                                <input class="form-check-input" type="radio" name="Gender" value="true" id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Male
+                                </label>
+                            </div>
+                            <div class="form-check m-l-100">
+                                <input class="form-check-input" type="radio" name="Gender" value="false" id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Famale
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="number" name="PhoneNumber" placeholder="Your Phone Number" required>
+                        <i class="how-pos4 pointer-none zmdi zmdi-phone"></i>
+                    </div>
+
+                    <div class="bor8 m-b-20 how-pos4-parent ">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30 " type="text" name="Address" placeholder="Your Address" required>
+                        <i class="how-pos4 pointer-none zmdi zmdi-home"></i>
+                    </div>
+
+
+                    <input class="flex-c-m stext-101 cl0 size-121 bg3  hov-btn3 p-lr-15 trans-04 pointer"
+                           type="submit" value="Register" />
+
+                }
+
+
+                <div class="mt-3">
+                    <a class="flex-c-m stext-101 cl0 size-121 bg3  hov-btn3 p-lr-15 trans-04 pointer"
+                       href="@Url.Action("Login","Login")">Login</a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+
